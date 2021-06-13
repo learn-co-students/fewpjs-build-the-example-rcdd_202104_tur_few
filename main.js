@@ -3,7 +3,27 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
-
+const error = document.getElementById('modal')
+const likeStatus = document.getElementsByClassName('like-glyph')
+// console.log(likeStatus) This is an HTML Collection need to make it into an array for forEach
+const likeStatusArray = [...likeStatus]
+likeStatusArray.forEach(element => {
+  element.addEventListener('click', function(e) {
+    if(element.textContent === EMPTY_HEART){
+      mimicServerCall()
+      .then(() => {
+        element.textContent = FULL_HEART;
+        element.className += 'activated-heart'
+      })
+      .catch(() => error.classList.remove('hidden'))
+      setTimeout(() => error.classList.add('hidden'), 3000)
+    }
+    else{
+      element.textContent = EMPTY_HEART
+      element.classList.remove('activated-heart')
+    }
+  })
+});
 
 
 
