@@ -3,10 +3,21 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+document.addEventListener('DOMContentLoaded', () => {
+  const likeButtons = document.querySelectorAll('.like-glyph');
+  let modal = document.querySelector('.hidden')
+  function displayError() {
+    modal.removeAttribute('class');
+    setTimeout(function(){ 
+      modal.setAttribute('class','hidden') }, 3);
+  };
 
+ 
+  likeButtons.forEach(button => {
+    likifyMe(button)
+  });
 
-
-
+});
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
 //------------------------------------------------------------------------------
