@@ -1,8 +1,35 @@
-// Defining text characters for the empty and full hearts for you to use later.
-const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
+const likes = document.querySelectorAll('li.like');
+for (let like of likes) {
+  like.addEventListener('click',function(event){
+    fillLike(event);
+  })
+}
 
-// Your JavaScript code goes here!
+function fillLike(event) {
+  const currentLike = event.target;
+
+  if (currentLike.innerText == EMPTY_HEART) {
+    // empty heart
+    const serverResponse = mimicServerCall()
+      .then(function(response){
+        currentLike.innerText = FULL_HEART;
+        currentLike.classList.add("activated-heart");
+      })
+      .catch(function(response){
+        const modal= document.querySelector('#modal');
+        modal.classList.remove("hidden");
+        modal.innerText = response;
+        setTimeout(function() {
+          modal.classList.add("hidden")
+        },3000);
+      })
+  } else {
+    // full heart
+    currentLike.innerText = EMPTY_HEART;
+    currentLike.classList.remove("activated-heart");
+  }
+}
 
 
 
